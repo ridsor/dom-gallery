@@ -17,17 +17,16 @@
       }
 
       .container {
-        width: 600px;
+        max-width: 600px;
+        width: 90%;
         margin: 0.6rem auto;
         border: 0.4rem solid #fff;
-        overflow: auto;
         background-color: #fff;
       }
 
       .container .jumbo {
         display: block;
         width: 100%;
-        object-fit: cover;
       }
 
       .container .thumbail {
@@ -35,13 +34,11 @@
         margin-top: 3px;
         gap: 3px;
         background-color: #fff;
-        grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+        grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
       }
 
       .container .thumbail .thumb {
-        max-width: 200px;
         width: 100%;
-        object-fit: cover;
         cursor: pointer;
       }
 
@@ -65,7 +62,7 @@
     <div class="container">
       <img src="./img/satu.jpg" alt="" class="jumbo" />
       <div class="thumbail">
-        <img src="./img/satu.jpg" alt="" class="thumb" />
+        <img src="./img/satu.jpg" alt="" class="thumb active" />
         <img src="./img/dua.jpg" alt="" class="thumb" />
         <img src="./img/tiga.jpg" alt="" class="thumb" />
         <img src="./img/empat.jpg" alt="" class="thumb" />
@@ -77,17 +74,19 @@
     <script>
       const container = document.querySelector('.container');
       const jumbo = document.querySelector('.jumbo');
-      let thumbSementara = null;
+      let thumbActive = document.querySelector('.thumb');
 
       container.addEventListener('click', function (e) {
         if (e.target.classList.contains('thumb')) {
-          jumbo.src = e.target.src;
-          jumbo.classList.add('fade');
-          setTimeout(() => jumbo.classList.remove('fade'), 500);
+          if (!e.target.classList.contains('active')) {
+            jumbo.src = e.target.src;
+            jumbo.classList.add('fade');
+            setTimeout(() => jumbo.classList.remove('fade'), 500);
 
-          if (thumbSementara) thumbSementara.classList.remove('active');
-          e.target.classList.add('active');
-          thumbSementara = e.target;
+            thumbActive.classList.remove('active');
+            e.target.classList.add('active');
+            thumbActive = e.target;
+          }
         }
       });
     </script>
