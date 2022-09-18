@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Gallery</title>
+    <style>
+      * {
+        font-family: Arial, Helvetica, sans-serif;
+      }
+
+      body {
+        background-color: #949191;
+        padding: 0;
+        margin: 0;
+      }
+
+      .container {
+        width: 600px;
+        margin: 0.6rem auto;
+        border: 0.4rem solid #fff;
+        overflow: auto;
+        background-color: #fff;
+      }
+
+      .container .jumbo {
+        display: block;
+        width: 100%;
+        object-fit: cover;
+      }
+
+      .container .thumbail {
+        display: grid;
+        margin-top: 3px;
+        gap: 3px;
+        background-color: #fff;
+        grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+      }
+
+      .container .thumbail .thumb {
+        max-width: 200px;
+        width: 100%;
+        object-fit: cover;
+        cursor: pointer;
+      }
+
+      .fade {
+        opacity: 0;
+        animation: fadeIn 0.5s forwards;
+      }
+
+      .active {
+        opacity: 0.5;
+      }
+
+      @keyframes fadeIn {
+        to {
+          opacity: 1;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <img src="./img/satu.jpg" alt="" class="jumbo" />
+      <div class="thumbail">
+        <img src="./img/satu.jpg" alt="" class="thumb" />
+        <img src="./img/dua.jpg" alt="" class="thumb" />
+        <img src="./img/tiga.jpg" alt="" class="thumb" />
+        <img src="./img/empat.jpg" alt="" class="thumb" />
+        <img src="./img/lima.jpg" alt="" class="thumb" />
+        <img src="./img/enam.jpg" alt="" class="thumb" />
+      </div>
+    </div>
+
+    <script>
+      const container = document.querySelector('.container');
+      const jumbo = document.querySelector('.jumbo');
+      let thumbSementara = null;
+
+      container.addEventListener('click', function (e) {
+        if (e.target.classList.contains('thumb')) {
+          jumbo.src = e.target.src;
+          jumbo.classList.add('fade');
+          setTimeout(() => jumbo.classList.remove('fade'), 500);
+
+          if (thumbSementara) thumbSementara.classList.remove('active');
+          e.target.classList.add('active');
+          thumbSementara = e.target;
+        }
+      });
+    </script>
+  </body>
+</html>
